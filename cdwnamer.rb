@@ -1,6 +1,7 @@
 #!/usr/bin/ruby
 
 require 'colorize'
+require 'clipboard'
 
 name = "Firkins_James"
 topics = {
@@ -27,4 +28,6 @@ unless topics.include?(topic)
   exit
 end
 
-puts "#{name}_SCME#{topic}_#{topics[topic]}_#{assignment}"
+filename = "#{name}_SCME#{topic}_#{topics[topic]}_#{assignment}"
+puts filename.green
+Clipboard.copy(filename)
