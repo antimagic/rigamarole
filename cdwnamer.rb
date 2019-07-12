@@ -4,6 +4,11 @@ require 'colorize'
 require 'clipboard'
 
 class CdwNamer
+  attr_accessor :name
+  attr_accessor :topic
+  attr_accessor :topics
+  attr_accessor :assignment
+
   def initialize
     @name = "Firkins_James"
     @topics = {
@@ -13,26 +18,6 @@ class CdwNamer
     }
     @topic = self.getTopic
     @assignment = self.getAssignment
-  end
-
-  def name
-    return @name
-  end
-
-  def topic
-    return @topic
-  end
-
-  def topics
-    return @topics
-  end
-
-  def assignment
-    return @assignment
-  end
-
-  def topics
-    return @topics
   end
 
   def filename
@@ -61,6 +46,5 @@ class CdwNamer
 end
 
 cdw = CdwNamer.new
-
 puts cdw.filename.green
 Clipboard.copy(cdw.filename)
