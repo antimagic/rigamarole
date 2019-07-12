@@ -3,31 +3,64 @@
 require 'colorize'
 require 'clipboard'
 
-name = "Firkins_James"
-topics = {
-  '1400' => "Bootcamp",
-  '1402' => "IntroToDigitalPainting"
-}
+class CdwNamer
+  def initialize
+    @name = "Firkins_James"
+    @topics = {
+      '1400' => "Bootcamp",
+      '1402' => "IntroToDigitalPainting",
+      '1403' => "IntroToCharacterDesign"
+    }
+    @topic = self.getTopic
+    @assignment = self.getAssignment
+  end
 
-def getAssignment(a)
-  a = "FILLMEIN" if a.nil?
-  return a
+  def name
+    return @name
+  end
+
+  def topic
+    return @topic
+  end
+
+  def topics
+    return @topics
+  end
+
+  def assignment
+    return @assignment
+  end
+
+  def topics
+    return @topics
+  end
+
+  def filename
+    return "#{self.name}_SCME#{self.topic}_#{self.topics[self.topic]}_#{self.assignment}"
+  end
+
+  def getTopic
+    code = ARGV[0]
+    if code.nil?
+      puts "Come on man give me a topic code.".red
+      exit
+    end
+    
+    unless self.topics.include?(code)
+      puts "#{code} isn't a topic code I know about.".red
+      exit
+    end
+
+    return code
+  end
+
+  def getAssignment
+    return "FILLMEIN" if ARGV[1].nil?
+    return ARGV[1]
+  end
 end
 
-# ARGV gives you all the args
-topic = ARGV[0]
-if topic.nil?
-  puts "Come on man give me a topic code.".red
-  exit
-end
+cdw = CdwNamer.new
 
-assignment = getAssignment(ARGV[1])
-
-unless topics.include?(topic)
-  puts "#{topic} isn't a topic code I know about.".red
-  exit
-end
-
-filename = "#{name}_SCME#{topic}_#{topics[topic]}_#{assignment}"
-puts filename.green
-Clipboard.copy(filename)
+puts cdw.filename.green
+Clipboard.copy(cdw.filename)
