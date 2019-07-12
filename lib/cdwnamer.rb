@@ -27,7 +27,7 @@ class CdwNamer
     end
     
     unless self.topics.include?(code)
-      puts "#{code} isn't a topic code I know about.".red
+      puts "#{code} isn't a topic code I know about. Add it to your config!".red
       exit
     end
 
