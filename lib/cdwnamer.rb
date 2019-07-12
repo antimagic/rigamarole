@@ -39,11 +39,13 @@ class CdwNamer
     return ARGV[1]
   end
 
+  # Loads the config.yaml from the execution dir and grabs its cdwnamer object.
+  # Sensible errors if it can't find it or the cdwnamer key isn't there.
   def loadConfig
     begin
       config = YAML.load_file("config.yaml")
     rescue StandardError => err
-      puts "Couldn't load config.yaml. Does it exist?".red
+      puts "Couldn't load config.yaml from #{Dir.pwd}. Does it exist?".red
       exit
     end
 
