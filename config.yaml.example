@@ -1,0 +1,5 @@
+cdwnamer:
+  name: "Lastname_Firstname"
+  topics:
+    "1001": "TopicLongName"
+    "1002": "AddAsManyAsYouNeed"

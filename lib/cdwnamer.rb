@@ -1,4 +1,5 @@
 require 'colorize'
+require 'yaml'
 
 class CdwNamer
   attr_accessor :name
@@ -7,12 +8,9 @@ class CdwNamer
   attr_accessor :assignment
 
   def initialize
-    @name = "Firkins_James"
-    @topics = {
-      '1400' => "Bootcamp",
-      '1402' => "IntroToDigitalPainting",
-      '1403' => "IntroToCharacterDesign"
-    }
+    config = self.loadConfig
+    @name = config["name"]
+    @topics = config["topics"]
     @topic = self.getTopic
     @assignment = self.getAssignment
   end
@@ -39,5 +37,21 @@ class CdwNamer
   def getAssignment
     return "FILLMEIN" if ARGV[1].nil?
     return ARGV[1]
+  end
+
+  def loadConfig
+    begin
+      config = YAML.load_file("config.yaml")
+    rescue StandardError => err
+      puts "Couldn't load config.yaml. Does it exist?".red
+      exit
+    end
+
+    if config.key?("cdwnamer")
+      return config["cdwnamer"]
+    end
+
+    puts "config.yaml didn't contain settings for cdwnamer. Check the config.yaml.example!".red
+    exit
   end
 end
